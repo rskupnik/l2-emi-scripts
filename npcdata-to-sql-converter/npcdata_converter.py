@@ -1,6 +1,7 @@
 import sys
 import os
 import re
+import math
 
 ID_REGEX = r"npc_begin\s+.+\s+(\d+)"
 REGEX = r"npc_begin\s+.+\s+(\d+)\s+.*level=([\d.]+).+org_hp=([\d.]+).+org_mp=([\d.]+).+base_physical_attack=([\d.]+).+base_attack_speed=([\d.]+).+base_magic_attack=([\d.]+).+base_defend=([\d.]+).+base_magic_defend=([\d.]+)"
@@ -33,14 +34,14 @@ def main(input_file, start_id, end_id, output_file):
             id, level, hp, mp, patk, atkspd, matk, pdef, mdef = match.groups()
             #print(f"id: {id}, level: {level}, hp: {hp}, mp: {mp}, patk: {patk}, atkspd: {atkspd}, matk: {matk}, pdef: {pdef}, mdef: {mdef}")
             output[id] = {
-                "level": float(level),
-                "hp": float(hp),
-                "mp": float(mp),
-                "patk": float(patk),
-                "atkspd": float(atkspd),
-                "matk": float(matk),
-                "pdef": float(pdef),
-                "mdef": float(mdef)
+                "level": math.ceil(float(level)),
+                "hp": math.ceil(float(hp)),
+                "mp": math.ceil(float(mp)),
+                "patk": math.ceil(float(patk)),
+                "atkspd": math.ceil(float(atkspd)),
+                "matk": math.ceil(float(matk)),
+                "pdef": math.ceil(float(pdef)),
+                "mdef": math.ceil(float(mdef))
             }
     
     # Write to an SQL output file
